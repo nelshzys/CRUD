@@ -954,11 +954,10 @@ server.createContext("/atualizar", exchange -> {
             exchange.close();
 
         });   
-        
+
         server.start();
 
         System.out.println("Servidor em http://localhost:8080");
 
     }
 }
-
