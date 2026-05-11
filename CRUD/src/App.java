@@ -255,6 +255,8 @@ public class App {
                 <a href='/clientes'>← Voltar à lista</a><br><br>
 
                 <form method='POST' action='/guardar'>
+                    NIF:
+                    <input name='nif' required>
                     Nome:
                     <input name='nome' required>
                     Email:
@@ -311,6 +313,8 @@ public class App {
 
                 String telefone = "";
 
+                String nif = "";
+
 
                 for (String p : params) {
 
@@ -325,6 +329,8 @@ public class App {
 
 
                         switch (key) {
+
+                            case "nif": nif = value; break;
 
                             case "nome": nome = value; break;
 
@@ -349,16 +355,18 @@ public class App {
                 }
 
 
-                String sql = "INSERT INTO clientes(nome,email,telefone) VALUES (?,?,?)";
+                String sql = "INSERT INTO clientes(nif,nome,email,telefone) VALUES (?,?,?,?)";
 
                 PreparedStatement ps = con.prepareStatement(sql);
 
 
-                ps.setString(1, nome);
+                ps.setString(1, nif);
 
-                ps.setString(2, email);
+                ps.setString(2, nome);
 
-                ps.setString(3, telefone);
+                ps.setString(3, email);
+
+                ps.setString(4, telefone);
 
 
                 ps.executeUpdate();
@@ -506,6 +514,8 @@ server.createContext("/editar", exchange -> {
 
         String telefone = rs.getString("telefone");
 
+        String nif = rs.getString("nif");
+
 
         html.append("""
 
@@ -543,6 +553,8 @@ server.createContext("/editar", exchange -> {
 
         html.append("<input type='hidden' name='id' value='").append(id).append("'>");
 
+
+        html.append("NIF:<input name='nif' value='").append(nif).append("' required>");
 
         html.append("Nome:<input name='nome' value='").append(nome).append("' required>");
 
@@ -636,6 +648,8 @@ server.createContext("/atualizar", exchange -> {
 
         String telefone = "";
 
+        String nif = "";
+
 
         for (String p : params) {
 
@@ -652,6 +666,8 @@ server.createContext("/atualizar", exchange -> {
                 switch (key) {
 
                     case "id": idStr = value; break;
+
+                    case "nif": nif = value; break;
 
                     case "nome": nome = value; break;
 
@@ -679,18 +695,20 @@ server.createContext("/atualizar", exchange -> {
         }
 
 
-        String sql = "UPDATE clientes SET nome=?, email=?, telefone=? WHERE id=?";
+        String sql = "UPDATE clientes SET nif=?, nome=?, email=?, telefone=? WHERE id=?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
 
-        ps.setString(1, nome);
+        ps.setString(1, nif);
 
-        ps.setString(2, email);
+        ps.setString(2, nome);
 
-        ps.setString(3, telefone);
+        ps.setString(3, email);
 
-        ps.setInt(4, id);
+        ps.setString(4, telefone);
+
+        ps.setInt(5, id);
 
 
         ps.executeUpdate();
