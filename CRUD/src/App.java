@@ -159,6 +159,8 @@ public class App {
 
                             <th>ID</th>
 
+                            <th>Nif</th>
+
                             <th>Nome</th>
 
                             <th>Email</th>
@@ -192,147 +194,83 @@ public class App {
 
 
                 while (rs.next()) {
-
                     int id = rs.getInt("id");
-
                     String nome = rs.getString("nome");
-
                     String email = rs.getString("email");
-
                     String telefone = rs.getString("telefone");
+                    String nifx = rs.getString("nif");
 
 
                     html.append("<tr>");
-
                     html.append("<td>").append(id).append("</td>");
-
+                    html.append("<td>").append(nifx).append("</td>");
                     html.append("<td>").append(nome).append("</td>");
-
                     html.append("<td>").append(email).append("</td>");
-
                     html.append("<td>").append(telefone).append("</td>");
 
-
                     html.append("<td>");
-
                     html.append("<a href='/editar?id=").append(id).append("'>Editar</a>");
-
                     html.append("<a href='/apagar?id=").append(id)
-
-                        .append("' onclick=\"return confirm('Eliminar cliente?')\">Apagar</a>");
-
+                    .append("' onclick=\"return confirm('Eliminar cliente?')\">Apagar</a>");
                     html.append("</td>");
 
-
                     html.append("</tr>");
-
                 }
 
-
             } catch (Exception e) {
-
                 e.printStackTrace();
-
             }
 
-
             html.append("""
-
                 </table>
-
                 </body>
-
                 </html>
-
             """);
 
-
             exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
-
             exchange.sendResponseHeaders(200, html.toString().getBytes().length);
-
             exchange.getResponseBody().write(html.toString().getBytes());
-
             exchange.close();
-
         });            
 
-
-
      // FORM NOVO CLIENTE
-
         server.createContext("/novo", exchange -> {
 
-
             StringBuilder html = new StringBuilder();
-
-
             html.append("""
-
                 <html>
-
                 <head>
-
                     <meta charset="UTF-8">
-
                     <style>
-
                         body { font-family: Arial; }
-
                         form { width: 300px; }
-
                         input { width: 100%; padding: 8px; margin-bottom: 10px; }
-
                         button { padding: 8px 12px; }
-
                         a { text-decoration: none; }
-
                     </style>
-
                 </head>
-
                 <body>
 
-
                 <h2>Novo Cliente</h2>
-
-
                 <a href='/clientes'>← Voltar à lista</a><br><br>
 
-
                 <form method='POST' action='/guardar'>
-
                     Nome:
-
                     <input name='nome' required>
-
-
                     Email:
-
                     <input name='email' type='email' required>
 
-
                     Telefone:
-
                     <input name='telefone'>
-
-
                     <button type='submit'>Guardar</button>
-
                 </form>
-
-
                 </body>
-
                 </html>
-
             """);
 
 
             exchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
-
             exchange.sendResponseHeaders(200, html.toString().getBytes().length);
-
             exchange.getResponseBody().write(html.toString().getBytes());
 
             exchange.close();
