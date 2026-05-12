@@ -701,8 +701,8 @@ server.createContext("/atualizar", exchange -> {
                         </style>
                     </head>
                     <body>
-                    <h2>Lista de Clientes</h2>
-                    <a href='/novo'>+ Novo Cliente</a><br><br>
+                    <h2>Lista de Produtos</h2>
+                    <a href='/produtonovo'>+ Novo Produto</a><br><br>
 
                     <table>
                         <tr>
