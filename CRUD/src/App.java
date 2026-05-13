@@ -707,11 +707,11 @@ server.createContext("/atualizar", exchange -> {
                     <table>
                         <tr>
                             <th>ID</th>
-                            <th>Nif</th>
-                            <th>Nome</th>
-                            <th>Email</th>
+                            <th>Referência do Produto</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
                             <th>Telefone</th>
-                            <th>Ações</th>
+                            <th>Ações</th> 
                         </tr>
                 """);             
 
