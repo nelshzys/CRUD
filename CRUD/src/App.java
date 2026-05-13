@@ -724,14 +724,15 @@ server.createContext("/atualizar", exchange -> {
 
             try {
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM clientes");
+                ResultSet rs = st.executeQuery("SELECT * FROM produtos");
 
                 while (rs.next()) {
                     int id = rs.getInt("id");
-                    String nome = rs.getString("nome");
-                    String email = rs.getString("email");
-                    String telefone = rs.getString("telefone");
-                    String nifx = rs.getString("nif");
+                    String nome = rs.getString("Referência do Produto");
+                    String email = rs.getString("Produto");
+                    String telefone = rs.getString("Preço");
+                    String nifx = rs.getString("Telefone");
+                    String nifx = rs.getString("Ações");
 
 
                     html.append("<tr>");
